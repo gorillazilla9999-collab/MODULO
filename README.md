@@ -54,3 +54,11 @@ src/
 
 All persistence goes through `src/services/storage.js` and the hooks in `src/store/`.
 To move to an API / PostgreSQL later, replace the storage calls in those hooks with async API calls; components don't touch `localStorage` directly.
+
+## Deploy to GitHub Pages
+
+1. Push to `main` (the included workflow builds the app automatically).
+2. In the repo go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
+3. Open the **Actions** tab, wait for "Deploy to GitHub Pages" to finish, then visit your Pages URL.
+
+Pages must serve the built `dist/` output, not the repository root. The root `index.html` points at `/src/main.jsx`, which browsers can't run, and that shows as a blank page.
