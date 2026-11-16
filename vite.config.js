@@ -7,4 +7,6 @@ export default defineConfig({
   base: './',
   plugins: [react()],
   server: { port: 5173 },
+  // Built files go to /docs so GitHub Pages can serve them with "Deploy from a branch → main → /docs".
+  build: { outDir: 'docs', emptyOutDir: true },
 });

@@ -55,10 +55,19 @@ src/
 All persistence goes through `src/services/storage.js` and the hooks in `src/store/`.
 To move to an API / PostgreSQL later, replace the storage calls in those hooks with async API calls; components don't touch `localStorage` directly.
 
-## Deploy to GitHub Pages
+## Deploy to GitHub Pages (deploy from a branch)
 
-1. Push to `main` (the included workflow builds the app automatically).
-2. In the repo go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
-3. Open the **Actions** tab, wait for "Deploy to GitHub Pages" to finish, then visit your Pages URL.
+The app must be built before it can be hosted. Builds go to `docs/`:
 
-Pages must serve the built `dist/` output, not the repository root. The root `index.html` points at `/src/main.jsx`, which browsers can't run, and that shows as a blank page.
+```bash
+npm install
+npm run build        # writes the site into docs/
+git add -A
+git commit -m "Build site"
+git push
+```
+
+Then in the repo: **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main` → Folder: `/docs` → Save.**
+
+Re-run the build and commit `docs/` whenever you change the app.
+Pages can't serve the repo root, because the root `index.html` points at `/src/main.jsx`, which browsers can't run (blank page).
